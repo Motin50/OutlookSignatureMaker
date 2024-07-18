@@ -16,8 +16,8 @@
         <div class="content">
             <form id="signature-form">
                 <div class="form-group">
-                    <label for="logo">Logo <span class="required">*</span>:</label>
-                    <select id="logo" required>
+                    <label for="logo">Logo :</label>
+                    <select id="logo" >
                         <option value="https://motin.fr/logo-signature/logo_perrard.png">Logo Perrard</option>
                         <option selected value="https://motin.fr/logo-signature/logo_motin_sans_ams.png">Logo Motin sans AMS</option>
                         <option value="https://motin.fr/logo-signature/logo_motin_avec_ams.png">Logo Motin avec AMS</option>
@@ -27,27 +27,42 @@
                     <input type="hidden" id="custom-logo-data">
                 </div>
                 <div class="form-group">
-                    <label for="first-name">Prénom <span class="required">*</span>:</label>
-                    <input type="text" id="first-name" required placeholder="Jean">
+                    <label for="name">Couleur du séparateur :</label>
+                    <input type="color" id="separator-color" value="#C41230">
+
+                    <label for="name">Couleur des liens :</label>
+                    <input type="color" id="link-color"  value="#C41230">
+
+                    <label for="name">Couleur du texte :</label>
+                    <input type="color" id="text-color"  value="#000000">
+                </div>
+
+                <div class="form-group">
+                    <button id="reset-colors" onclick="resetColors()">Réinitialiser les couleurs</button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="first-name">Prénom :</label>
+                    <input type="text" id="first-name"  placeholder="Jean">
                 </div>
                 <div class="form-group">
-                    <label for="last-name">Nom <span class="required">*</span>:</label>
-                    <input type="text" id="last-name" required placeholder="Dupont">
+                    <label for="last-name">Nom :</label>
+                    <input type="text" id="last-name"  placeholder="Dupont">
                 </div>
                 <div class="form-group">
-                    <label for="title">Intitulé du poste <span class="required">*</span>:</label>
-                    <input type="text" id="title" required placeholder="Commercial">
+                    <label for="title">Intitulé du poste :</label>
+                    <input type="text" id="title"  placeholder="Commercial">
                 </div>
                 <div class="form-group">
-                    <label for="email">Email <span class="required">*</span>:</label>
-                    <input type="email" id="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="exemple@motin.fr">
+                    <label for="email">Email :</label>
+                    <input type="email" id="email"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="exemple@motin.fr">
                 </div>
                 <div class="form-group">
-                    <label for="phone">Téléphone <span class="required">*</span>:</label>
-                    <input type="tel" id="phone" required pattern="[0-9]{10}" placeholder="0123456789">
+                    <label for="phone">Téléphone :</label>
+                    <input type="tel" id="phone"  pattern="[0-9]{10}" placeholder="0123456789">
                 </div>
                 <div class="form-group">
-                    <label for="site">Adresse <span class="required">*</span>:</label>
+                    <label for="site">Adresse :</label>
                     <select id="site">
                         <option selected value="Motin Saint-Gilles">Motin Saint-Gilles</option>
                         <option value="Motin Vire">Motin Vire</option>

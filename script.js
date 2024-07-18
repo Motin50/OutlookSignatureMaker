@@ -23,6 +23,15 @@ document.getElementById('facebook').addEventListener('input', generateSignature)
 document.getElementById('instagram').addEventListener('input', generateSignature);
 document.getElementById('linkedin').addEventListener('input', generateSignature);
 document.getElementById('tiktok').addEventListener('input', generateSignature);
+document.getElementById('separator-color').addEventListener('input', generateSignature);
+document.getElementById('link-color').addEventListener('input', generateSignature);
+document.getElementById('text-color').addEventListener('input', generateSignature);
+
+function resetColors() {
+    document.getElementById('separator-color').value = '#C41230';
+    document.getElementById('link-color').value = '#C41230';
+    document.getElementById('text-color').value = '#000000';
+}
 
 function handleLogoUpload(event) {
     const file = event.target.files[0];
@@ -65,6 +74,9 @@ function generateSignature() {
     const instagram = document.getElementById('instagram').value || 'https://www.instagram.com/motin_normagri/';
     const linkedin = document.getElementById('linkedin').value || 'https://www.linkedin.com/company/motin-normagri';
     const tiktok = document.getElementById('tiktok').value || 'https://www.tiktok.com/@motin_sas';
+    const separatorColor = document.getElementById('separator-color').value;
+    const linkColor = document.getElementById('link-color').value;
+    const textColor = document.getElementById('text-color').value;
 
     const siteDetails = {
         'Motin Saint-Gilles': { url: 'https://www.motin.fr', address: 'Route de Saint-Lô', city: 'Saint-Gilles', postalCode: '50180' },
@@ -75,19 +87,19 @@ function generateSignature() {
     };
 
     const signatureHTML = `
-        <table style="border-collapse: collapse; font-family: Arial, sans-serif; width: 700px;">
+        <table style="border-collapse: collapse; font-family: Arial, sans-serif; width: 700px; color: ${textColor};">
             <tr>
                 <td style="padding: 10px; width: 125px;"><img src="${logo}" alt="Logo" style="width: 100px; height: auto;"></td>
-                <td style="border-left: 4px solid #C41230; width: 15px;"></td>
+                <td style="border-left: 4px solid ${separatorColor}; width: 15px;"></td>
                 <td style="padding-left: 20px;">
                     <div style="font-size: 20px; font-weight: bold;">${firstName} ${lastName}</div>
                     <div style="font-size: 14px; font-style: italic;">${title}</div>
                     <table style="font-size: 12px; margin-top: 4px; width: 70%;">
                         <tr style="margin-right: 10px;">
                             <td>
-                                <a href="mailto:${email}" style="color: #C41230; text-decoration: none;">${email}</a><br>
-                                <a href="tel:+33${phone}" style="color: #C41230; text-decoration: none;">+33 ${phone}</a><br>
-                                <a href="${siteDetails[site].url}" style="color: #C41230; text-decoration: none;">${siteDetails[site].url}</a>
+                                <a href="mailto:${email}" style="color: ${linkColor}; text-decoration: none;">${email}</a><br>
+                                <a href="tel:+33${phone}" style="color: ${linkColor}; text-decoration: none;">+33 ${phone}</a><br>
+                                <a href="${siteDetails[site].url}" style="color: ${linkColor}; text-decoration: none;">${siteDetails[site].url}</a>
                             </td>
                             <td>
                                 <div style="font-weight: bold;">Adresse</div>
