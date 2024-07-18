@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Builder de Signature de Mail</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://motin.fr/logo-signature/logo_motin_sans_ams.png" alt="Logo Motin" class="logo">
+            <h1>Générateur de signature de mail pour Motin</h1>
+        </div>
+        <div class="content">
+            <form id="signature-form">
+                <div class="form-group">
+                    <label for="logo">Logo <span class="required">*</span>:</label>
+                    <select id="logo" required>
+                        <option value="https://motin.fr/logo-signature/logo_perrard.png">Logo Perrard</option>
+                        <option selected value="https://motin.fr/logo-signature/logo_motin_sans_ams.png">Logo Motin sans AMS</option>
+                        <option value="https://motin.fr/logo-signature/logo_motin_avec_ams.png">Logo Motin avec AMS</option>
+                    </select>
+                    <label for="custom-logo" style="margin-top: 10px;">Ou télécharger un logo personnalisé:</label>
+                    <input type="file" id="custom-logo" accept="image/*">
+                    <input type="hidden" id="custom-logo-data">
+                </div>
+                <div class="form-group">
+                    <label for="first-name">Prénom <span class="required">*</span>:</label>
+                    <input type="text" id="first-name" required placeholder="Jean">
+                </div>
+                <div class="form-group">
+                    <label for="last-name">Nom <span class="required">*</span>:</label>
+                    <input type="text" id="last-name" required placeholder="Dupont">
+                </div>
+                <div class="form-group">
+                    <label for="title">Intitulé du poste <span class="required">*</span>:</label>
+                    <input type="text" id="title" required placeholder="Commercial">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email <span class="required">*</span>:</label>
+                    <input type="email" id="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="exemple@motin.fr">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Téléphone <span class="required">*</span>:</label>
+                    <input type="tel" id="phone" required pattern="[0-9]{10}" placeholder="0123456789">
+                </div>
+                <div class="form-group">
+                    <label for="site">Adresse <span class="required">*</span>:</label>
+                    <select id="site">
+                        <option selected value="Motin Saint-Gilles">Motin Saint-Gilles</option>
+                        <option value="Motin Vire">Motin Vire</option>
+                        <option value="Motin Isigny le Buat">Motin Isigny le Buat</option>
+                        <option value="AMS Valognes">AMS Valognes</option>
+                        <option value="ETS Perrard">ETS Perrard</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="facebook">Facebook:</label>
+                    <input type="checkbox" id="facebook-checkbox" checked> <label class="checkbox-label" for="facebook-checkbox">Afficher ?</label>
+                    <input type="url" id="facebook" value="https://www.facebook.com/motinnormagri">
+                </div>
+                <div class="form-group">
+                    <label for="instagram">Instagram:</label>
+                    <input type="checkbox" id="instagram-checkbox" checked> <label class="checkbox-label" for="instagram-checkbox">Afficher ?</label>
+                    <input type="url" id="instagram" value="https://www.instagram.com/motin_normagri">
+                </div>
+                <div class="form-group">
+                    <label for="linkedin">LinkedIn:</label>
+                    <input type="checkbox" id="linkedin-checkbox" checked> <label class="checkbox-label" for="linkedin-checkbox">Afficher ?</label>
+                    <input type="url" id="linkedin" value="https://www.linkedin.com/company/motin-normagri">
+                </div>
+                <div class="form-group">
+                    <label for="tiktok">TikTok:</label>
+                    <input type="checkbox" id="tiktok-checkbox" checked> <label class="checkbox-label" for="tiktok-checkbox">Afficher ?</label>
+                    <input type="url" id="tiktok" value="https://www.tiktok.com/@motin_sas">
+                </div>
+            </form>
+            <div class="signature-section">
+                <div id="signature-preview"></div>
+                <button id="copy-signature" onclick="copySignature()">Copier la signature</button>
+                <div class="outlook-tutorial">
+                    <h2>Comment ajouter la signature dans Outlook ?</h2>
+                    <p>1. Copiez la signature en cliquant sur le bouton "Copier la signature".</p>
+                    <p>2. Ouvrez Outlook.</p>
+                    <p>3. Allez dans "Fichier" > "Options" > "Courrier" > "Signatures".</p>
+                    <p>4. Cliquez sur "Nouveau" et collez la signature.</p>
+                    <p>5. Sélectionnez la signature pour les nouveaux messages et les réponses/transferts.</p>
+                    <p>6. Cliquez sur "OK".</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

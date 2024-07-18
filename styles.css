@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2; /* Ajout d'une couleur de fond */
+}
+
+.container {
+    width: 85%;
+    margin: 20px auto; /* Ajustement des marges pour plus d'espace */
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    text-align: center; /* Centrage du contenu du header */
+    margin-bottom: 20px;
+}
+
+.logo {
+    max-width: 100px; /* Taille maximale du logo */
+}
+
+h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #333; /* Couleur de titre légèrement assombrie */
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap; /* Permettre le retour à la ligne sur les petits écrans */
+    justify-content: center; /* Centrage des éléments */
+    gap: 100px; /* Espacement entre les éléments */
+}
+
+#signature-form {
+    min-width: 400px; /* Largeur minimale du formulaire */
+    height: 70vh;
+    flex: 1; /* Utilisation de l'espace disponible */
+    max-width: 500px; /* Largeur maximale du formulaire */
+    padding-right: 20px; /* Espacement à droite du formulaire */
+    overflow-y: auto; /* Défilement vertical si nécessaire */
+}
+
+.signature-section {
+    flex: 1; /* Utilisation de l'espace disponible */
+    max-width: 500px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold; /* Mise en gras des libellés */
+}
+
+.checkbox-label {
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: normal; /* Retour à la police normale pour les cases à cocher */
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+input[type="checkbox"] {
+    display: inline-block;
+    width: auto;
+    margin-bottom: 10px;
+}
+
+button {
+    background-color: #C41230;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    display: inline-block;
+    margin-top: 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease; /* Animation de transition */
+}
+
+button:hover {
+    background-color: #9e0923; /* Couleur au survol */
+}
+
+#signature-preview {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #ccc;
+}
+
+.required {
+    color: #C41230;
+    font-weight: bold;
+}
+
+/* Média query pour les petits écrans */
+@media screen and (max-width: 768px) {
+    .content {
+        flex-direction: column; /* Passage à une colonne pour les petits écrans */
+    }
+
+    #signature-form,
+    .signature-section {
+        max-width: 100%; /* Pleine largeur pour les petits écrans */
+    }
+}
