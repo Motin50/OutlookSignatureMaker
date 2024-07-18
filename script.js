@@ -1,3 +1,6 @@
+const MotinColor = '#C41230';
+const PerrardColor = '#FF6A08';
+
 document.addEventListener('DOMContentLoaded', () => {
     generateSignature();
 });
@@ -5,10 +8,26 @@ document.addEventListener('DOMContentLoaded', () => {
 document.getElementById('custom-logo').addEventListener('change', handleLogoUpload);
 
 document.getElementById('logo').addEventListener('input', () => {
-    // Clear custom logo data when a preset logo is selected
     document.getElementById('custom-logo-data').value = '';
     generateSignature();
 });
+
+document.getElementById('logo').addEventListener('change', () => {
+    if(document.getElementById('logo').value === 'https://motin.fr/logo-signature/logo_perrard.png') {
+        document.getElementById('site').value = 'ETS Perrard';
+        document.getElementById('separator-color').value = PerrardColor;
+        document.getElementById('link-color').value = PerrardColor;
+        document.getElementById('text-color').value = '#000000';
+        generateSignature();
+    } else {
+        resetColors();
+        document.getElementById('site').value = 'Motin Saint-Gilles';
+        generateSignature();
+    }
+
+});
+
+
 document.getElementById('first-name').addEventListener('input', generateSignature);
 document.getElementById('last-name').addEventListener('input', generateSignature);
 document.getElementById('title').addEventListener('input', generateSignature);
@@ -27,10 +46,19 @@ document.getElementById('separator-color').addEventListener('input', generateSig
 document.getElementById('link-color').addEventListener('input', generateSignature);
 document.getElementById('text-color').addEventListener('input', generateSignature);
 
-function resetColors() {
-    document.getElementById('separator-color').value = '#C41230';
-    document.getElementById('link-color').value = '#C41230';
-    document.getElementById('text-color').value = '#000000';
+function resetColors(event) {
+    event.preventDefault();
+    if(document.getElementById('logo').value !== 'https://motin.fr/logo-signature/logo_perrard.png') {
+        document.getElementById('separator-color').value = MotinColor
+        document.getElementById('link-color').value = MotinColor;
+        document.getElementById('text-color').value = '#000000';
+        generateSignature();
+    } else {
+        document.getElementById('separator-color').value = PerrardColor;
+        document.getElementById('link-color').value = PerrardColor;
+        document.getElementById('text-color').value = '#000000';
+        generateSignature();
+    }
 }
 
 function handleLogoUpload(event) {
@@ -87,7 +115,7 @@ function generateSignature() {
     };
 
     const signatureHTML = `
-        <table style="border-collapse: collapse; font-family: Arial, sans-serif; width: 700px; color: ${textColor};">
+        <table style="border-collapse: collapse; font-family: Arial, sans-serif; width: 600px; color: ${textColor};">
             <tr>
                 <td style="padding: 10px; width: 125px;"><img src="${logo}" alt="Logo" style="width: 100px; height: auto;"></td>
                 <td style="border-left: 4px solid ${separatorColor}; width: 15px;"></td>

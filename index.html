@@ -18,9 +18,9 @@
                 <div class="form-group">
                     <label for="logo">Logo :</label>
                     <select id="logo" >
-                        <option value="https://motin.fr/logo-signature/logo_perrard.png">Logo Perrard</option>
                         <option selected value="https://motin.fr/logo-signature/logo_motin_sans_ams.png">Logo Motin sans AMS</option>
                         <option value="https://motin.fr/logo-signature/logo_motin_avec_ams.png">Logo Motin avec AMS</option>
+                        <option value="https://motin.fr/logo-signature/logo_perrard.png">Logo Perrard</option>
                     </select>
                     <label for="custom-logo" style="margin-top: 10px;">Ou télécharger un logo personnalisé:</label>
                     <input type="file" id="custom-logo" accept="image/*">
@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button id="reset-colors" onclick="resetColors()">Réinitialiser les couleurs</button>
+                    <button id="reset-colors" onclick="resetColors(event)">Réinitialiser les couleurs</button>
                 </div>
                 
                 <div class="form-group">
