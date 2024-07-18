@@ -32,10 +32,10 @@ function handleLogoUpload(event) {
             const img = new Image();
             img.onload = function() {
                 const canvas = document.createElement('canvas');
-                canvas.width = 150;
-                canvas.height = 150;
+                canvas.width = 200;
+                canvas.height = 200;
                 const ctx = canvas.getContext('2d');
-                ctx.drawImage(img, 0, 0, 100, 100);
+                ctx.drawImage(img, 0, 0, 200, 200);
                 document.getElementById('custom-logo-data').value = canvas.toDataURL('image/png');
                 generateSignature();
             };
