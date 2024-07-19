@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <a href="/app.php" class="btn btn-admin">Admin</a>
     <div class="container">
         <div class="header">
             <img src="https://motin.fr/logo-signature/logo_motin_sans_ams.png" alt="Logo Motin" class="logo">
@@ -62,14 +63,22 @@
                     <input type="tel" id="phone"  pattern="[0-9]{10}" placeholder="0123456789">
                 </div>
                 <div class="form-group">
+                    <label for="phone2">Téléphone 2 (optionnel) :</label>
+                    <input type="tel" id="phone2"  pattern="[0-9]{10}" placeholder="0123456789 (facultatif)">
+                </div>
+                <div class="form-group">
                     <label for="site">Adresse :</label>
                     <select id="site">
-                        <option selected value="Motin Saint-Gilles">Motin Saint-Gilles</option>
-                        <option value="Motin Vire">Motin Vire</option>
-                        <option value="Motin Isigny le Buat">Motin Isigny le Buat</option>
-                        <option value="AMS Valognes">AMS Valognes</option>
-                        <option value="ETS Perrard">ETS Perrard</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="custom-address">Ou ajouter une adresse personnalisée:</label>
+                    <label for="address" style="margin-top: 10px; font-size: 12px;">Rue :</label>
+                    <input type="text" id="address" placeholder="1 rue de la Paix">
+                    <label for="zip" style="font-size: 12px; margin-top: 5px;">Code postal :</label>
+                    <input type="text" id="zip" placeholder="75000" pattern="[0-9]{5}">
+                    <label for="city" style="font-size: 12px; margin-top: 5px;">Ville :</label>
+                    <input type="text" id="city" placeholder="Paris">
                 </div>
                 <div class="form-group">
                     <label for="facebook">Facebook:</label>

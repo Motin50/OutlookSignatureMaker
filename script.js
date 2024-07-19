@@ -1,9 +1,47 @@
 const MotinColor = '#C41230';
 const PerrardColor = '#FF6A08';
+let sites = {};
 
 document.addEventListener('DOMContentLoaded', () => {
+    fetchAddresses();
     generateSignature();
 });
+
+async function fetchAddresses() {
+    try {
+        const response = await fetch('address.json');
+        const data = await response.json();
+        populateSiteOptions(data.sites);
+        populateSiteDetails(data.sites);
+        sites = data.sites;
+    } catch (error) {
+        console.error('Error fetching address data:', error);
+    }
+}
+
+function populateSiteOptions(sites) {
+    const siteSelect = document.getElementById('site');
+    siteSelect.innerHTML = ''; // Clear existing options
+    for (const site in sites) {
+        const option = document.createElement('option');
+        option.value = site;
+        option.textContent = site;
+        siteSelect.appendChild(option);
+        // Set default site
+        if (site === 'Motin Saint-Gilles') {
+            siteSelect.value = site;
+            generateSignature();
+        }
+    }
+}
+
+function populateSiteDetails(sites) {
+    document.getElementById('site').addEventListener('input', () => {
+        generateSignature();
+    });
+}
+
+
 
 document.getElementById('custom-logo').addEventListener('change', handleLogoUpload);
 
@@ -15,13 +53,27 @@ document.getElementById('logo').addEventListener('input', () => {
 document.getElementById('logo').addEventListener('change', () => {
     if(document.getElementById('logo').value === 'https://motin.fr/logo-signature/logo_perrard.png') {
         document.getElementById('site').value = 'ETS Perrard';
+        for (let i = 0; i < document.getElementById('site').length; i++) {
+            if (document.getElementById('site').options[i].value !== 'ETS Perrard') {
+                document.getElementById('site').options[i].disabled = true;
+            }
+        }
         document.getElementById('separator-color').value = PerrardColor;
         document.getElementById('link-color').value = PerrardColor;
         document.getElementById('text-color').value = '#000000';
+        document.getElementById('facebook').value = 'https://www.facebook.com/PerrardMontbray/?locale=fr_FR';
         generateSignature();
     } else {
-        resetColors();
         document.getElementById('site').value = 'Motin Saint-Gilles';
+        // rend les autres options du select sélectionnables
+        for (let i = 0; i < document.getElementById('site').length; i++) {
+            document.getElementById('site').options[i].disabled = false;
+        }
+        document.getElementById('separator-color').value = MotinColor;
+        document.getElementById('link-color').value = MotinColor;
+        document.getElementById('text-color').value = '#000000';
+        document.getElementById('facebook').value = 'https://www.facebook.com/motinnormagri';
+        resetColors(event);
         generateSignature();
     }
 
@@ -33,7 +85,11 @@ document.getElementById('last-name').addEventListener('input', generateSignature
 document.getElementById('title').addEventListener('input', generateSignature);
 document.getElementById('email').addEventListener('input', generateSignature);
 document.getElementById('phone').addEventListener('input', generateSignature);
+document.getElementById('phone2').addEventListener('input', generateSignature);
 document.getElementById('site').addEventListener('input', generateSignature);
+document.getElementById('address').addEventListener('input', generateSignature);
+document.getElementById('zip').addEventListener('input', generateSignature);
+document.getElementById('city').addEventListener('input', generateSignature);
 document.getElementById('facebook-checkbox').addEventListener('input', generateSignature);
 document.getElementById('instagram-checkbox').addEventListener('input', generateSignature);
 document.getElementById('linkedin-checkbox').addEventListener('input', generateSignature);
@@ -52,12 +108,13 @@ function resetColors(event) {
         document.getElementById('separator-color').value = MotinColor
         document.getElementById('link-color').value = MotinColor;
         document.getElementById('text-color').value = '#000000';
-        generateSignature();
+        console.log(document.getElementById('site').value);
+        generateSignature(sites[document.getElementById('site').value]);
     } else {
         document.getElementById('separator-color').value = PerrardColor;
         document.getElementById('link-color').value = PerrardColor;
         document.getElementById('text-color').value = '#000000';
-        generateSignature();
+        generateSignature(sites[document.getElementById('site').value]);
     }
 }
 
@@ -82,17 +139,23 @@ function handleLogoUpload(event) {
     }
 }
 
-function generateSignature() {
+async function generateSignature() {
+    const selectedSite = document.getElementById('site').value;
+    const siteDetails = sites[selectedSite];
     const selectLogo = document.getElementById('logo').value;
     const customLogo = document.getElementById('custom-logo-data').value;
     const logo = customLogo || selectLogo;
-
+    const custom_address = document.getElementById('address').value;
+    const custom_postalCode = document.getElementById('zip').value;
+    const custom_city = document.getElementById('city').value;
     const firstName = document.getElementById('first-name').value;
     const lastName = document.getElementById('last-name').value;
     const title = document.getElementById('title').value;
     const email = document.getElementById('email').value;
     let phone = document.getElementById('phone').value;
     phone = phone.replace(/\B(?=(\d{2})+(?!\d))/g, ' ');
+    let phone2 = document.getElementById('phone2').value;
+    phone2 = phone2.replace(/\B(?=(\d{2})+(?!\d))/g, ' ');
     const site = document.getElementById('site').value;
     const facebookCheck = document.getElementById('facebook-checkbox').checked;
     const instagramCheck = document.getElementById('instagram-checkbox').checked;
@@ -106,14 +169,6 @@ function generateSignature() {
     const linkColor = document.getElementById('link-color').value;
     const textColor = document.getElementById('text-color').value;
 
-    const siteDetails = {
-        'Motin Saint-Gilles': { url: 'https://www.motin.fr', address: 'Route de Saint-Lô', city: 'Saint-Gilles', postalCode: '50180' },
-        'Motin Vire': { url: 'https://www.motin.fr', address: 'ZA La Papillonnière', city: 'Vire', postalCode: '14500' },
-        'Motin Isigny le Buat': { url: 'https://www.motin.fr', address: '23 Route du Mont Saint Michel', city: 'Isigny le Buat', postalCode: '50540' },
-        'AMS Valognes': { url: 'https://www.motin.fr', address: 'ZA D\'Armanville', city: 'Valognes', postalCode: '50700' },
-        'ETS Perrard': { url: 'https://www.ets-perrard.fr', address: 'Le Bourg Neuf', city: 'Montbray', postalCode: '50410' },
-    };
-
     const signatureHTML = `
         <table style="border-collapse: collapse; font-family: Arial, sans-serif; width: 600px; color: ${textColor};">
             <tr>
@@ -126,13 +181,14 @@ function generateSignature() {
                         <tr style="margin-right: 10px;">
                             <td>
                                 <a href="mailto:${email}" style="color: ${linkColor}; text-decoration: none;">${email}</a><br>
-                                <a href="tel:+33${phone}" style="color: ${linkColor}; text-decoration: none;">+33 ${phone}</a><br>
-                                <a href="${siteDetails[site].url}" style="color: ${linkColor}; text-decoration: none;">${siteDetails[site].url}</a>
+                                ${phone ? `<a href="tel:+33${phone}" style="color: ${linkColor}; text-decoration: none;">+33 ${phone}</a><br>` : ''}
+                                ${phone2 ? `<a href="tel:+33${phone2}" style="color: ${linkColor}; text-decoration: none;"> ${phone2}</a><br>` : ''}
+                                <a href="${siteDetails ? siteDetails.url : ''}" style="color: ${linkColor}; text-decoration: none;">${siteDetails ? siteDetails.url : ''}</a>
                             </td>
                             <td>
                                 <div style="font-weight: bold;">Adresse</div>
-                                <div>${siteDetails[site].address}</div>
-                                <div>${siteDetails[site].postalCode} ${siteDetails[site].city}</div>
+                                <div>${custom_address ? custom_address : (siteDetails ? siteDetails.address : '')}</div>
+                                <div>${custom_postalCode ? custom_postalCode : (siteDetails ? siteDetails.postalCode : '')} ${custom_city ? custom_city : (siteDetails ? siteDetails.city : '')}</div>
                             </td>
                         </tr>
                     </table>
@@ -149,6 +205,8 @@ function generateSignature() {
 
     document.getElementById('signature-preview').innerHTML = signatureHTML;
 }
+
+
 
 function copySignature() {
     const signaturePreview = document.getElementById('signature-preview');

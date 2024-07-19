@@ -1,0 +1,34 @@
+{
+    "sites": {
+        "Motin Saint-Gilles": {
+            "url": "https:\/\/www.motin.fr",
+            "address": "Route de Saint-L\u00f4",
+            "city": "Saint-Gilles",
+            "postalCode": "50180"
+        },
+        "Motin Vire": {
+            "url": "https:\/\/www.motin.fr",
+            "address": "ZA La Papillonni\u00e8re",
+            "city": "Vire",
+            "postalCode": "14500"
+        },
+        "Motin Isigny le Buat": {
+            "url": "https:\/\/www.motin.fr",
+            "address": "23 Route du Mont Saint Michel",
+            "city": "Isigny le Buat",
+            "postalCode": "50540"
+        },
+        "ETS Perrard": {
+            "url": "https:\/\/www.ets-perrard.fr",
+            "address": "Le Bourg Neuf",
+            "city": "Montbray",
+            "postalCode": "50410"
+        },
+        "AMS Valognes": {
+            "url": "https:\/\/www.motin.fr",
+            "address": "ZA D'Armanville",
+            "city": "Valognes",
+            "postalCode": "50700"
+        }
+    }
+}
