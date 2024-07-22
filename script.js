@@ -193,10 +193,10 @@ async function generateSignature() {
                         </tr>
                     </table>
                     <div style="margin-top: 4px;">
-                        ${facebookCheck ? `<a href="${facebook}"><img src="https://motin.fr/logo-signature/facebook_20.png" alt="Facebook" width="20" height="20" style="margin-right: 5px;"></a>` : ''}
-                        ${instagramCheck ? `<a href="${instagram}"><img src="https://motin.fr/logo-signature/instagram_20.png" alt="Instagram" width="20" height="20" style="margin-right: 5px;"></a>` : ''}
-                        ${linkedinCheck ? `<a href="${linkedin}"><img src="https://motin.fr/logo-signature/linkedin_20.png" width="20" height="20" alt="LinkedIn" style="margin-right: 5px;"></a>` : ''}
-                        ${tiktokCheck ? `<a href="${tiktok}"><img src="https://motin.fr/logo-signature/tiktok_20.png" alt="TikTok" width="20" height="20" style="margin-right: 5px;"></a>` : ''}
+                        ${facebookCheck ? `<a href="${facebook}"><img src="https://motin.fr/logo-signature/facebook_logo.png" alt="Facebook" width="20" height="20" style="margin-right: 5px;"></a>` : ''}
+                        ${instagramCheck ? `<a href="${instagram}"><img src="https://motin.fr/logo-signature/instagram_logo.png" alt="Instagram" width="20" height="20" style="margin-right: 5px;"></a>` : ''}
+                        ${linkedinCheck ? `<a href="${linkedin}"><img src="https://motin.fr/logo-signature/linkedin_logo.png" width="20" height="20" alt="LinkedIn" style="margin-right: 5px;"></a>` : ''}
+                        ${tiktokCheck ? `<a href="${tiktok}"><img src="https://motin.fr/logo-signature/tiktok_logo.png" alt="TikTok" width="20" height="20" style="margin-right: 5px;"></a>` : ''}
                     </div>
                 </td>
             </tr>
