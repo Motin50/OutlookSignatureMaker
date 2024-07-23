@@ -51,7 +51,7 @@ document.getElementById('logo').addEventListener('input', () => {
 });
 
 document.getElementById('logo').addEventListener('change', () => {
-    if(document.getElementById('logo').value === 'https://motin.fr/logo-signature/logo_perrard.svg') {
+    if(document.getElementById('logo').value === 'https://motin.fr/logo-signature/logo_perrard.png') {
         document.getElementById('site').value = 'ETS Perrard';
         for (let i = 0; i < document.getElementById('site').length; i++) {
             if (document.getElementById('site').options[i].value !== 'ETS Perrard') {
@@ -104,7 +104,7 @@ document.getElementById('text-color').addEventListener('input', generateSignatur
 
 function resetColors(event) {
     event.preventDefault();
-    if(document.getElementById('logo').value !== 'https://motin.fr/logo-signature/logo_perrard.svg') {
+    if(document.getElementById('logo').value !== 'https://motin.fr/logo-signature/logo_perrard.png') {
         document.getElementById('separator-color').value = MotinColor
         document.getElementById('link-color').value = MotinColor;
         document.getElementById('text-color').value = '#000000';
