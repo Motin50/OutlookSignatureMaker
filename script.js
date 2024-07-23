@@ -189,6 +189,7 @@ async function generateSignature() {
                                 <div style="font-weight: bold;">Adresse</div>
                                 <div>${custom_address ? custom_address : (siteDetails ? siteDetails.address : '')}</div>
                                 <div>${custom_postalCode ? custom_postalCode : (siteDetails ? siteDetails.postalCode : '')} ${custom_city ? custom_city : (siteDetails ? siteDetails.city : '')}</div>
+                                <div>France</div>
                             </td>
                         </tr>
                     </table>
@@ -201,6 +202,10 @@ async function generateSignature() {
                 </td>
             </tr>
         </table>
+        <div style="font-size: 10px; margin-top: 10px; color: #666;">
+            Nos sites : St-Gilles (50), Vire (14), Isigny Le Buat (50), Valognes (50)
+        </div>
+
     `;
 
     document.getElementById('signature-preview').innerHTML = signatureHTML;
