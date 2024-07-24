@@ -1,6 +1,7 @@
 const MotinColor = '#C41230';
 const PerrardColor = '#FF6A08';
 let sites = {};
+let sitesValue = 'Nos sites : Saint-Gilles (50), Vire (14), Isigny Le Buat (50), Valognes (50)';
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchAddresses();
@@ -41,8 +42,6 @@ function populateSiteDetails(sites) {
     });
 }
 
-
-
 document.getElementById('custom-logo').addEventListener('change', handleLogoUpload);
 
 document.getElementById('logo').addEventListener('input', () => {
@@ -51,7 +50,8 @@ document.getElementById('logo').addEventListener('input', () => {
 });
 
 document.getElementById('logo').addEventListener('change', () => {
-    if(document.getElementById('logo').value === 'https://motin.fr/logo-signature/logo_perrard.png') {
+    if (document.getElementById('logo').value === 'https://motin.fr/logo-signature/logo_perrard.png') {
+        console.log('Perrard logo selected');
         document.getElementById('site').value = 'ETS Perrard';
         for (let i = 0; i < document.getElementById('site').length; i++) {
             if (document.getElementById('site').options[i].value !== 'ETS Perrard') {
@@ -62,10 +62,17 @@ document.getElementById('logo').addEventListener('change', () => {
         document.getElementById('link-color').value = PerrardColor;
         document.getElementById('text-color').value = '#000000';
         document.getElementById('facebook').value = 'https://www.facebook.com/PerrardMontbray/?locale=fr_FR';
+        // désélectionner les réseaux sociaux
+        document.getElementById('instagram-checkbox').checked = false;
+        document.getElementById('linkedin-checkbox').checked = false;
+        document.getElementById('tiktok-checkbox').checked = false;
+
+        sitesValue = '';
         generateSignature();
     } else {
+        console.log('Non-Perrard logo selected');
         document.getElementById('site').value = 'Motin Saint-Gilles';
-        // rend les autres options du select sélectionnables
+        // rendre les autres options du select sélectionnables
         for (let i = 0; i < document.getElementById('site').length; i++) {
             document.getElementById('site').options[i].disabled = false;
         }
@@ -73,12 +80,14 @@ document.getElementById('logo').addEventListener('change', () => {
         document.getElementById('link-color').value = MotinColor;
         document.getElementById('text-color').value = '#000000';
         document.getElementById('facebook').value = 'https://www.facebook.com/motinnormagri';
+        sitesValue = 'Nos sites : Saint-Gilles (50), Vire (14), Isigny Le Buat (50), Valognes (50)';
+        document.getElementById('instagram-checkbox').checked = true;
+        document.getElementById('linkedin-checkbox').checked = true;
+        document.getElementById('tiktok-checkbox').checked = true;
         resetColors(event);
         generateSignature();
     }
-
 });
-
 
 document.getElementById('first-name').addEventListener('input', generateSignature);
 document.getElementById('last-name').addEventListener('input', generateSignature);
@@ -104,8 +113,8 @@ document.getElementById('text-color').addEventListener('input', generateSignatur
 
 function resetColors(event) {
     event.preventDefault();
-    if(document.getElementById('logo').value !== 'https://motin.fr/logo-signature/logo_perrard.png') {
-        document.getElementById('separator-color').value = MotinColor
+    if (document.getElementById('logo').value !== 'https://motin.fr/logo-signature/logo_perrard.png') {
+        document.getElementById('separator-color').value = MotinColor;
         document.getElementById('link-color').value = MotinColor;
         document.getElementById('text-color').value = '#000000';
         console.log(document.getElementById('site').value);
@@ -169,6 +178,11 @@ async function generateSignature() {
     const linkColor = document.getElementById('link-color').value;
     const textColor = document.getElementById('text-color').value;
 
+    let facebookHTML = '';
+    if (facebookCheck) {
+        facebookHTML = `<a href="${facebook}"><img src="https://motin.fr/logo-signature/facebook_logo.png" alt="Facebook" width="20" height="20" style="margin-right: 5px;"></a>`;
+    }
+
     const signatureHTML = `
         <table style="border-collapse: collapse; font-family: Arial, sans-serif; width: 600px; color: ${textColor};">
             <tr>
@@ -177,40 +191,48 @@ async function generateSignature() {
                 <td style="padding-left: 20px;">
                     <div style="font-size: 20px; font-weight: bold;">${firstName} ${lastName}</div>
                     <div style="font-size: 14px; font-style: italic;">${title}</div>
-                    <table style="font-size: 12px; margin-top: 4px; width: 70%;">
-                        <tr style="margin-right: 10px;">
-                            <td>
+                    <table style="font-size: 12px; margin-top: 4px; width: 100%;">
+                        <tr>
+                            <td style="width: 40%;">
                                 <a href="mailto:${email}" style="color: ${linkColor}; text-decoration: none;">${email}</a><br>
                                 ${phone ? `<a href="tel:+33${phone}" style="color: ${linkColor}; text-decoration: none;">+33 ${phone}</a><br>` : ''}
                                 ${phone2 ? `<a href="tel:+33${phone2}" style="color: ${linkColor}; text-decoration: none;"> ${phone2}</a><br>` : ''}
                                 <a href="${siteDetails ? siteDetails.url : ''}" style="color: ${linkColor}; text-decoration: none;">${siteDetails ? siteDetails.url : ''}</a>
                             </td>
-                            <td>
+                            <td style="width: ${selectLogo === 'https://motin.fr/logo-signature/logo_perrard.png' ? '33%' : '50%'};">
                                 <div style="font-weight: bold;">Adresse</div>
                                 <div>${custom_address ? custom_address : (siteDetails ? siteDetails.address : '')}</div>
                                 <div>${custom_postalCode ? custom_postalCode : (siteDetails ? siteDetails.postalCode : '')} ${custom_city ? custom_city : (siteDetails ? siteDetails.city : '')}</div>
                                 <div>France</div>
                             </td>
+                            ${selectLogo === 'https://motin.fr/logo-signature/logo_perrard.png' ? `
+                                <td style="vertical-align: center; width: 33%;">
+                                    ${facebookHTML}
+                                </td>` : ''}
                         </tr>
                     </table>
-                    <div style="margin-top: 4px;">
-                        ${facebookCheck ? `<a href="${facebook}"><img src="https://motin.fr/logo-signature/facebook_logo.png" alt="Facebook" width="20" height="20" style="margin-right: 5px;"></a>` : ''}
-                        ${instagramCheck ? `<a href="${instagram}"><img src="https://motin.fr/logo-signature/instagram_logo.png" alt="Instagram" width="20" height="20" style="margin-right: 5px;"></a>` : ''}
-                        ${linkedinCheck ? `<a href="${linkedin}"><img src="https://motin.fr/logo-signature/linkedin_logo.png" width="20" height="20" alt="LinkedIn" style="margin-right: 5px;"></a>` : ''}
-                        ${tiktokCheck ? `<a href="${tiktok}"><img src="https://motin.fr/logo-signature/tiktok_logo.png" alt="TikTok" width="20" height="20" style="margin-right: 5px;"></a>` : ''}
-                    </div>
+                    ${selectLogo !== 'https://motin.fr/logo-signature/logo_perrard.png' ? `
+                        <div style="margin-top: 4px;">
+                            ${facebookHTML}
+                            ${instagramCheck ? `<a href="${instagram}"><img src="https://motin.fr/logo-signature/instagram_logo.png" alt="Instagram" width="20" height="20" style="margin-right: 5px;"></a>` : ''}
+                            ${linkedinCheck ? `<a href="${linkedin}"><img src="https://motin.fr/logo-signature/linkedin_logo.png" width="20" height="20" alt="LinkedIn" style="margin-right: 5px;"></a>` : ''}
+                            ${tiktokCheck ? `<a href="${tiktok}"><img src="https://motin.fr/logo-signature/tiktok_logo.png" alt="TikTok" width="20" height="20" style="margin-right: 5px;"></a>` : ''}
+                        </div>` : `
+                        <div style="margin-top: 4px;">
+                            ${instagramCheck ? `<a href="${instagram}"><img src="https://motin.fr/logo-signature/instagram_logo.png" alt="Instagram" width="20" height="20" style="margin-right: 5px;"></a>` : ''}
+                            ${linkedinCheck ? `<a href="${linkedin}"><img src="https://motin.fr/logo-signature/linkedin_logo.png" width="20" height="20" alt="LinkedIn" style="margin-right: 5px;"></a>` : ''}
+                            ${tiktokCheck ? `<a href="${tiktok}"><img src="https://motin.fr/logo-signature/tiktok_logo.png" alt="TikTok" width="20" height="20" style="margin-right: 5px;"></a>` : ''}
+                        </div>`}
                 </td>
             </tr>
         </table>
-        <div style="font-size: 10px; margin-top: 10px; color: #666;">
-            Nos sites : St-Gilles (50), Vire (14), Isigny Le Buat (50), Valognes (50)
+        <div id="sites-list" style="font-size: 13px; margin-top: 10px; color: #666; font-weight: bold;">
+            ${sitesValue}
         </div>
-
     `;
 
     document.getElementById('signature-preview').innerHTML = signatureHTML;
 }
-
 
 
 function copySignature() {
