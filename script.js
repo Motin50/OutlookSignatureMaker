@@ -186,7 +186,7 @@ async function generateSignature() {
     const signatureHTML = `
         <table style="border-collapse: collapse; font-family: Arial, sans-serif; width: 600px; color: ${textColor};">
             <tr>
-                <td style="padding: 10px; width: 125px;"><img src="${logo}" alt="Logo" style="width: 100px; height: auto;"></td>
+                <td style="padding: 10px; width: 125px;"><img src="${logo}" alt="Logo" width="100" style="width: 100px; height: auto;"></td>
                 <td style="border-left: 4px solid ${separatorColor}; width: 15px;"></td>
                 <td style="padding-left: 20px;">
                     <div style="font-size: 20px; font-weight: bold;">${firstName} ${lastName}</div>
